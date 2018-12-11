@@ -1,0 +1,192 @@
+* {
+	box-sizing: border-box;
+	&:focus {
+		outline-color: lighten($maincolor, 20);
+	}
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	overflow-x: hidden;
+	background-color: $backgroundcolor;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	scroll-behavior: smooth;
+	& main {
+		min-height: 50vh; // Force height for direct-body main containers (should be one)
+	}
+}
+
+.hidden {
+	display: none !important;
+}
+
+.sticky {
+	position: sticky;
+}
+
+.visuallyhidden {
+	position: absolute; 
+	overflow: hidden; 
+	clip: rect(0 0 0 0); 
+	height: 1px; width: 1px; 
+	margin: -1px; padding: 0; border: 0;
+	&.focusable:focus-within {
+		position: initial; 
+		overflow: initial; 
+		clip: initial; 
+		height: initial; width: initial; 
+		margin: initial; padding: initial; border: initial;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $titlecolor;
+}
+
+h1, h2, h3, h4, h5, h6, nav a {
+	font-family: $headfont;
+	font-weight: 400;
+	label {
+		color: $titlecolor;
+		font-family: $headfont;
+		font-weight: 400;
+	}
+}
+
+p, div, li, a {
+	font-family: $textfont;
+}
+
+p, main ul, footer ul, table, address, label {
+	color: $textcolor;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	font-style: normal;
+	&.light {
+		font-weight: 200;
+	}
+	& & {
+		font-size: 1em;
+		font-style: initial;
+	}
+}
+
+li {
+	p {
+		font-size: 1em;
+		margin: 0;
+	}
+}
+
+ul ul {
+	font-size: 1em;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	align-self: center; // This fixes streched images in flexboxes
+	min-width: 2em;
+	width: auto;
+	&.lazy {
+		transition: filter $trans;
+		filter: blur(.4rem);
+	}
+}
+
+@include aStyle($linkcolor);
+
+label {
+	font-family: $textfont;
+	font-weight: normal;
+	display: block;
+	font-size: 1.2em;
+	cursor: pointer;
+	input:not([type=submit]), textarea {
+		font-size: 1em;
+		margin-top: .5em;
+	}
+}
+input:not([type=submit]), textarea, select {
+	padding: 0.5em .6em;
+	font-size: 1.2em;
+	border: .13rem solid $base-grey;
+	background-color: rgba($base-grey, .05);
+	border-radius: $commonRadius;
+	max-width: 100%;
+	margin-bottom: 1em;
+	color: rgba($textcolor, .7);
+	&:not([type=checkbox]):not([type=radio]) {
+		width: 100%;
+	}
+	&.missing {
+		border: 1px solid $error;
+	}
+	&:invalid {
+		border-color: $error;
+		background-color: rgba($error, .05);
+	}
+	&:placeholder-shown {
+		border-color: rgba($maincolor, .1);
+		background-color: rgba($maincolor, .05);
+		&:required {
+			border-color: $maincolor;
+		}
+	}
+	&:valid:not(:placeholder-shown):not(select) {
+		border-color: $confirm;
+		background-color: rgba($confirm, .05);
+	}
+}
+input[type=radio], input[type=checkbox] {
+	display: inline;
+	margin: 0 1rem 0 0;
+	// TODO: Radio buttons
+	+ label {
+		display: inline;
+	}
+}
+textarea {
+	min-height: 8em;
+}
+
+legend {
+	float: left;
+	font-size: 1.4em;
+	margin-left: -.1em;
+	margin-bottom: .8em;
+	margin-top: .2em;
+	width: 100%;
+}
+
+fieldset {
+	border: 0;
+	padding: 1rem 2rem;
+	border-radius: $commonRadius;
+	&:valid {
+		background-color: rgba($confirm, .05);
+		& & {
+			background-color: unset;
+		}
+	}
+	& & {
+		margin: -1rem -2rem 1rem;
+		legend {
+			font-size: 1.2em;
+		}
+	}
+}
+
+font {
+	display: block;
+}
