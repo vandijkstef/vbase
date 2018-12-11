@@ -1,0 +1,27 @@
+{
+  "name": "vbase",
+  "version": "0.0.1",
+  "description": "Web base used througout my projects",
+  "main": "''",
+  "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1",
+	"build": "npm run build-css",
+	"build-dev": "npm run build-dev-css",
+	"build-all": "npm run build && npm run build-dev",
+	"build-css": "node-sass --include-path scss --output-style compressed ./css/sass/stylesheet.scss ./css/style.min.css",
+	"build-dev-css": "node-sass --include-path scss ./css/sass/stylesheet.scss ./css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vandijkstef/vbase.git"
+  },
+  "author": "Stef van Dijk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vandijkstef/vbase/issues"
+  },
+  "homepage": "https://github.com/vandijkstef/vbase#readme",
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
