@@ -1,5 +1,9 @@
-class Lazy {
+class Lazy extends vBase {
+	
+	images: NodeListOf<HTMLImageElement>;
+
 	constructor() {
+		super();
 		this.images = document.querySelectorAll('img.lazy');
 		this.Lazyfi();
 	}
@@ -25,10 +29,10 @@ class Lazy {
 	}
 
 	Load(image) {
-		if (image.classList.contains('lazy') && image.src != image.dataset.src) {
+		if (image.classList.contains('lazy') && image.src != image.dataset.src && !image.classList.contains('loading')) {
 			// Preload the image
-			const img = new Image();
-			img.validate = 'never';
+			const img: HTMLImageElement = new Image();
+			image.classList.add('loading');
 			img.onload = () => {
 				image.src = img.src;
 				image.classList.remove('lazy');

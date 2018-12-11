@@ -19,3 +19,6 @@ For this project contributions are accepted under the following order of conditi
 
 Obviously, discussion is open on the issues boards even when you don't intend to commit.
 Note that this project is not trying to recreate a reset.css, jQuery or Bootstrap, but rather a solid and slim base for next-gen webdevelopment. 
+
+## TODO
+- Find a way to have generic data-like classes (address, user, product, cart, etc) easily integratable into various systems

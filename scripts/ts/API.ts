@@ -1,10 +1,17 @@
-export default class API {
-	constructor(url = '/api.php', ) {
-		this.server = url; // TODO: Parse this based on the current page url // TODO: Hook this up to a setting to allow to other domains
-		this.queryString = true;
+class API extends vBase {
+
+	server: string;
+	queryString: boolean;
+
+	constructor(API: string = '/api.php') {
+		super();
+		this.server = API;
+		if (this.server !== '/api.php') {
+			this.queryString = true;
+		}
 	}
 
-	call(data, callback) {
+	post(data: object, callback: Function) {
 		const API = new XMLHttpRequest();
 		API.open('POST', this.server);
 		API.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -33,9 +40,9 @@ export default class API {
 		}
 	}
 
-	get(data, callback) {
+	get(data: object, callback: Function) {
 		const API = new XMLHttpRequest();
-		API.open('GET', data);
+		API.open('GET', this.server); // TODO: Stringify object data into URL
 		API.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		API.onload = function () {
 			if (API.status === 200) {

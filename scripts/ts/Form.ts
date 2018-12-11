@@ -1,7 +1,23 @@
-class Form {
+// General form class, to be extended
+interface FormInput {
+	DOM: HTMLInputElement;
+	type: string;
+	value: string;
+}
+
+class Form extends vBase {
+
+	submitBtn: HTMLInputElement;
+	FormData: object;
+	fields: FormInput[];
+	Form: Form;
+	API: API;
+	DOM: HTMLFormElement;
+
 	constructor(form) {
+		super();
 		this.DOM = form;
-		this.DOM.Form = this;
+		this.DOM['Form'] = this;
 		this.submitBtn = this.DOM.querySelector('[type=submit]');
 		this.Refresh();
 		this.FormData = {
@@ -12,8 +28,8 @@ class Form {
 	}
 
 	Fetch() {
-		this.fields = {};
-		const inputs = this.DOM.querySelectorAll('input, textarea');
+		this.fields = [];
+		const inputs = this.DOM.querySelectorAll('input, textarea') as NodeListOf<HTMLInputElement>;
 		inputs.forEach((input) => {
 			// TODO: Checkbox/Radio stuff
 			if (input.type != 'submit') {
@@ -30,20 +46,24 @@ class Form {
 		if (!this.fields) {
 			this.Fetch();
 		}
-		Object.keys(this.fields).forEach((field) => {
-			field = this.fields[field];
+		Object.keys(this.fields).forEach((fieldName) => {
+			const field = this.fields[fieldName];
 			field.value = field.DOM.value;
 		});
 	}
 
 	GetValue(id) {
-		return this.fields[id].value;
+		try {
+			return this.fields[id].value;
+		} catch (err) {
+			console.warn(err, id);
+		}
 	}
 
 	Handle(e) {
 		e.preventDefault();
 		this.Form.Refresh();
-		this.API = new API(this.action);
+		this.API = new API(this.DOM.action);
 		this.Form.submitBtn.disabled = true;
 	}
 }

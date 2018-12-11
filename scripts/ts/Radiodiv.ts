@@ -1,4 +1,18 @@
+interface RadioWrap extends HTMLElement {
+	radiodiv: RadioDiv;
+}
+
+interface RadioInput extends HTMLInputElement {
+	radiodiv: RadioDiv;
+	// product: Product; // TODO: Extend?
+}
+
 class RadioDiv {
+
+	group: RadioWrap[];
+	div: RadioWrap;
+	input: RadioInput;
+
 	constructor(input, group) {
 		// Set variables
 		this.input = input;
@@ -9,7 +23,9 @@ class RadioDiv {
 		this.input.radiodiv = this;
 		this.div.radiodiv = this;
 
-		this.input.classList.add('visuallyhidden');
+		if (this.input.type == 'radio') {
+			this.input.classList.add('visuallyhidden');
+		}
 		this.div.classList.add('js');
 
 		// Set the radiodiv if the input is already checked
@@ -44,8 +60,11 @@ class RadioDiv {
 		}
 		this.div.classList.add('selected');
 		if (document.body.id === 'checkout_easy') {
-			new tempTotals();
+			// new tempTotals(); // TODO: Extend?
 		}
+		// if (this.input.product) { // TODO: Extend?
+		// 	this.input.product.UpdateAttribute(this.input);
+		// }
 	}
 
 	TestGroup() {
