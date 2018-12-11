@@ -1,0 +1,34 @@
+$borderWidth: .2rem;
+$commonRadius: .4rem;
+$trans: .2s;
+
+@import url('https://fonts.googleapis.com/css?family=Oswald|PT+Sans');
+@import url('/designer/fonts/Arial/stylesheet.css');
+@import url('/designer/fonts/Bebas-Neue/stylesheet.css');
+@import url('/designer/fonts/egfonts/egfonts.css');
+
+$headfont: 'Oswald', sans-serif;
+$textfont: 'PT Sans', sans-serif;
+
+$maincolor: rgb(0, 96, 196);
+$contrastcolor: goldenrod;
+$textcolor: #222222;
+$textcolor-light: #EEEEEE;
+$confirm: green;
+$error: tomato;
+$titlecolor: $maincolor;
+$base-grey: #E3E5E7;
+$backgroundcolor: $base-grey;
+$dark-grey: #999999;
+$linkcolor: $maincolor;
+
+// Product colors
+$product-blue: #11054C;
+$product-white: white;
+$product-black: black;
+$product-green: #022102;
+$product-red: #560B0B;
+$product-cream: #FAF9C9;
+$product-grey-light: #AFB0B4;
+$product-grey-dark: #474745;
+$product-grey-green: #4A5C4D;

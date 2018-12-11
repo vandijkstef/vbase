@@ -1,0 +1,79 @@
+// Output something with a CSS variable
+@mixin var($property, $varName, $fallback:false) {
+	$var: getVar($varName);
+	@if $var { // If we got a variable from the map, use it
+		#{$property}: #{$var}; // Output legacy CSS
+		@if $fallback { // If we have a fallback, include it
+			#{$property}: var(--#{$varName}, $var, $fallback);
+		} @else { // else, dont
+			#{$property}: var(--#{$varName}, $var);
+		}
+	} @else { // No variable set, use the fallback
+		#{$property}: #{$fallback}; // Output legacy CSS
+		#{$property}: var(--#{$varName}, $fallback); // Still provide the link to a CSS variable, should it become available
+	}
+}
+
+// Create a button style, 
+@mixin createButtonStyle($className, $background, $text) {
+	@if ($className == 'default') {
+		@include _buttonStyle($background, $text);
+	} @else {
+		&.#{$className} {
+			@include _buttonStyle($background, $text);
+		}
+	}
+}
+
+// The actual button style
+@mixin _buttonStyle($background, $text) {
+	background-color: $background;
+	color: $text;
+	border-color: $background;
+	&:hover:not(:disabled), &:focus:not(:disabled) {
+		background-color: $text;
+		color: $background;
+		border-color: $text;
+	}
+	&:focus:not(:disabled) {
+		text-decoration: underline;
+	}
+	&.inv {
+		background-color: $text;
+		color: $background;
+		border-color: $text;
+		&:hover:not(:disabled), &:focus:not(:disabled) {
+			background-color: $background;
+			color: $text;
+			border-color: $background;
+		}
+	}
+}
+
+@mixin aStyle($color, $underline:true) {
+	a:not(.button) {
+		color: $color;
+		transition: $trans;
+		text-decoration: none;
+		&:link, &:visited {
+			color: $color;
+		}
+		&:hover, &:active {
+			color: lighten($color, 10);
+			@if $underline {
+				text-decoration: underline;
+			} @else {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+@mixin hoverable($color, $lighten:10) {
+	background-color: $color;
+	transition: $trans;
+	&:hover:not(:disabled), &:focus-within:not(:disabled) {
+		background-color: lighten($color, $lighten);
+	}
+}
+

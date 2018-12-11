@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>vBase</title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="module">
+		// Get readme contents
+		// const page = new XMLHttpRequest();
+		// page.open('GET', '/README.md');
+		// page.onload = (data) => {
+		// 	document.body.innerHTML = data.target.response;
+		// };
+		// page.send();
+		import vBase from './scripts/vBase.js';
+		new vBase({
+			verbose: true,
+			modules: ['settings', 'API']
+		});
+	</script>
+</html>
