@@ -2,13 +2,8 @@ $borderWidth: .2rem;
 $commonRadius: .4rem;
 $trans: .2s;
 
-@import url('https://fonts.googleapis.com/css?family=Oswald|PT+Sans');
-@import url('/designer/fonts/Arial/stylesheet.css');
-@import url('/designer/fonts/Bebas-Neue/stylesheet.css');
-@import url('/designer/fonts/egfonts/egfonts.css');
-
-$headfont: 'Oswald', sans-serif;
-$textfont: 'PT Sans', sans-serif;
+$headfont: sans-serif;
+$textfont: sans-serif;
 
 $maincolor: rgb(0, 96, 196);
 $contrastcolor: goldenrod;
