@@ -1,10 +1,10 @@
-class RadioDiv {
+export class RadioDiv {
     constructor(input, group) {
         // Set variables
         this.input = input;
         this.div = input.parentElement;
         this.group = group;
-        // Put this class on the element for easy access
+        // Put this export class on the element for easy access
         this.input.radiodiv = this;
         this.div.radiodiv = this;
         if (this.input.type == 'radio') {

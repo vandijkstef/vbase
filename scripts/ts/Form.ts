@@ -1,3 +1,6 @@
+import { vBase } from './vbase/vBase';
+import { API } from './API';
+
 // General form class, to be extended
 interface FormInput {
 	DOM: HTMLInputElement;
@@ -5,7 +8,7 @@ interface FormInput {
 	value: string;
 }
 
-class Form extends vBase {
+export class Form extends vBase {
 
 	submitBtn: HTMLInputElement;
 	FormData: object;

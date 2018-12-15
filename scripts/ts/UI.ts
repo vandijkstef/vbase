@@ -1,4 +1,4 @@
-class UITools {
+export class UITools {
 	// Base
 	Create(classes?: Array<string>, id?: string, elementName: string = 'div') {
 		const element: any = document.createElement(elementName);
@@ -33,7 +33,7 @@ class UITools {
 	}
 
 	CreateSVG(src: string, title: string, classes: Array<string>, id: string, cacheIcon: boolean = false) {
-		// TODO: Rework so it can function without API, unless required. Maybe use class constructor for this?
+		// TODO: Rework so it can function without API, unless required. Maybe use export class constructor for this?
 		// const element = this.Create(classes, id, 'div');
 		// const iconCache = localStorage.getItem(src);
 		// if (!iconCache) {

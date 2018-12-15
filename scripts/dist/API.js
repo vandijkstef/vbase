@@ -1,4 +1,5 @@
-class API extends vBase {
+import { vBase } from './vbase/vBase';
+export class API extends vBase {
     constructor(API = '/api.php') {
         super();
         this.server = API;

@@ -1,4 +1,6 @@
-class Imageviewer extends vBaseHTML {
+import { vBaseHTML } from './vbase/vBaseHTML';
+import { Lazy } from './Lazy';
+export class Imageviewer extends vBaseHTML {
     constructor(mainWrap, gridWrap, options) {
         super(document.querySelector('#images .main img')); // TODO: This has to be a wrapper?
         // Settings

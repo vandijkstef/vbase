@@ -1,3 +1,6 @@
+import { vBaseHTML } from './vbase/vBaseHTML';
+import { Lazy } from './Lazy';
+
 interface ImageViewerSettings {
 	rotate: boolean;
 	direction: number;
@@ -16,7 +19,7 @@ interface ViewerButton extends HTMLButtonElement {
 	parentNode: HTMLElement;
 }
 
-class Imageviewer extends vBaseHTML {
+export class Imageviewer extends vBaseHTML {
 	// Image viewer
 
 	settings: ImageViewerSettings;

@@ -1,4 +1,6 @@
-class Form extends vBase {
+import { vBase } from './vbase/vBase';
+import { API } from './API';
+export class Form extends vBase {
     constructor(form) {
         super();
         this.DOM = form;

@@ -7,7 +7,7 @@ interface RadioInput extends HTMLInputElement {
 	// product: Product; // TODO: Extend?
 }
 
-class RadioDiv {
+export class RadioDiv {
 
 	group: RadioWrap[];
 	div: RadioWrap;
@@ -19,7 +19,7 @@ class RadioDiv {
 		this.div = input.parentElement;
 		this.group = group;
 
-		// Put this class on the element for easy access
+		// Put this export class on the element for easy access
 		this.input.radiodiv = this;
 		this.div.radiodiv = this;
 

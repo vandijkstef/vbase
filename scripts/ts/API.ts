@@ -1,4 +1,6 @@
-class API extends vBase {
+import { vBase } from './vbase/vBase';
+
+export class API extends vBase {
 
 	server: string;
 	queryString: boolean;

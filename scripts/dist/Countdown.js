@@ -1,4 +1,5 @@
-class Countdown extends vBaseHTML {
+import { vBaseHTML } from './vbase/vBaseHTML';
+export class Countdown extends vBaseHTML {
     constructor(timer) {
         super(timer);
         // this.DOM = timer;
