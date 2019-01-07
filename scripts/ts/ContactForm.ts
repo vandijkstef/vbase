@@ -1,9 +1,10 @@
 class ContactForm extends Form {
 	constructor(form) {
 		super(form);
+		this.Form = this;
 	}
 
-	Handle(e) {
+	protected Handle(this: Form, e: Event) {
 		super.Handle(e);
 		if (this.Form.GetValue('file')) {
 			// TODO: Properly handle JS file uplaods, for now, we just use basic browser POST
@@ -11,16 +12,16 @@ class ContactForm extends Form {
 			return;
 		}
 		const data = {
-			name: this.Form.GetValue('name'),
 			email: this.Form.GetValue('email'),
-			message: this.Form.GetValue('message'),
-			securityToken: this.Form.GetValue('securityToken'),
 			mailtosender: this.Form.GetValue('mailtosender'),
+			message: this.Form.GetValue('message'),
+			name: this.Form.GetValue('name'),
+			securityToken: this.Form.GetValue('securityToken'),
 		};
 		this.Form.FormData = Object.assign(this.Form.FormData, data);
-		this.API.post(this.Form.FormData, (data) => {
-			if (data.status) {
-				window['Messenger'].Add(data.success, 'success');
+		this.API.post(this.Form.FormData, (formData: any) => {
+			if (formData.status) {
+				window[`Messenger`].Add(formData.success, 'success');
 				this.Form.DOM.classList.add('hidden');
 			} else {
 				// TODO: Handle error

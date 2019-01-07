@@ -7,44 +7,44 @@ interface ImageViewerSettings {
 	fx: boolean;
 }
 
-interface ViewerImage extends HTMLImageElement {
+interface IViewerImage extends HTMLImageElement {
 	viewer: Imageviewer;
 }
 
-interface ViewerButton extends HTMLButtonElement {
+interface IViewerButton extends HTMLButtonElement {
 	viewer: Imageviewer;
 	parentNode: HTMLElement;
 }
 
-class Imageviewer extends vBaseHTML {
+class Imageviewer extends VBaseHTML {
 	// Image viewer
 
-	settings: ImageViewerSettings;
-	_index: number;
-	mainImage: HTMLImageElement;
-	grid: HTMLElement;
-	images: NodeListOf<ViewerImage>;
-	viewer: Imageviewer;
-	rotation: number;
+	private settings: ImageViewerSettings;
+	private index: number;
+	private mainImage: HTMLImageElement;
+	private grid: HTMLElement;
+	private images: NodeListOf<IViewerImage>;
+	private viewer: Imageviewer;
+	private rotation: any;
 
-	constructor(mainWrap: HTMLElement, gridWrap: HTMLElement, options: ImageViewerSettings) { // TODO: Test and implement these variables
+	constructor(mainWrap: HTMLElement, gridWrap: HTMLElement, options: ImageViewerSettings) {
+		// TODO: Test and implement these variables
 		super(document.querySelector('#images .main img')); // TODO: This has to be a wrapper?
 		// Settings
 		this.settings = {
-			rotate: true,
-			direction: 1,
-			rotateTime: 2,
 			clickable: true,
 			controls: true,
-			fx: true
+			direction: 1,
+			fx: true,
+			rotate: true,
+			rotateTime: 2,
 		};
-		
+
 		// Setup
-		this._index = 0;
-		
+		this.index = 0;
+
 		this.mainImage = document.querySelector('#images .main img');
 		this.grid = document.querySelector('#images #productAdditionalImages .grid');
-		
 
 		if (this.grid) {
 			this.MainToGrid();
@@ -66,8 +66,8 @@ class Imageviewer extends vBaseHTML {
 	}
 
 	// Set the viewer to the current index
-	Set() {
-		const newImg = this.images[this._index];
+	private Set() {
+		const newImg = this.images[this.index];
 		let img;
 		if (newImg.src !== this.mainImage.src) {
 			if (this.settings.fx === true) {
@@ -85,11 +85,11 @@ class Imageviewer extends vBaseHTML {
 				img = this.mainImage;
 				this.mainImage.src = newImg.src;
 			}
-			if (typeof(Lazy) == 'function' && newImg.dataset.src) { // TODO: test for Lazy() class
+			if (typeof(Lazy) === 'function' && newImg.dataset.src) { // TODO: test for Lazy() class
 				img.dataset.src = newImg.dataset.src;
-				if (img.src != img.dataset.src) {
+				if (img.src !== img.dataset.src) {
 					img.classList.add('lazy');
-					if (img != this.mainImage) {
+					if (img !== this.mainImage) {
 						this.mainImage.classList.add('lazy');
 					}
 				}
@@ -98,7 +98,7 @@ class Imageviewer extends vBaseHTML {
 		}
 	}
 
-	UpdateSelection(img) {
+	private UpdateSelection(img) {
 		const oldSelection = document.querySelector('img.selected');
 		if (oldSelection) {
 			oldSelection.classList.remove('selected');
@@ -106,25 +106,25 @@ class Imageviewer extends vBaseHTML {
 		img.classList.add('selected');
 	}
 
-	Next() {
+	private Next() {
 		const viewer = this.viewer || this;
-		viewer._index++;
-		if (viewer._index > viewer.images.length - 1) {
-			viewer._index = 0;
+		viewer.index++;
+		if (viewer.index > viewer.images.length - 1) {
+			viewer.index = 0;
 		}
 		viewer.Set();
 	}
 
-	Prev() {
+	private Prev() {
 		const viewer = this.viewer || this;
-		viewer._index--;
-		if (viewer._index < 0) {
-			viewer._index = viewer.images.length - 1;
+		viewer.index--;
+		if (viewer.index < 0) {
+			viewer.index = viewer.images.length - 1;
 		}
 		viewer.Set();
 	}
 
-	Rotate(skipMove: boolean = false) {
+	private Rotate(skipMove: boolean = false) {
 		if (!skipMove) {
 			if (this.settings.direction) {
 				this.Next();
@@ -137,8 +137,8 @@ class Imageviewer extends vBaseHTML {
 		}, this.settings.rotateTime * 1000);
 	}
 
-	ClickImage(this: ViewerButton) { // TODO: Test how this is handled in compile
-		this.viewer._index = [...this.parentNode.children].indexOf(this);
+	private ClickImage(this: IViewerButton) { // TODO: Test how this is handled in compile
+		this.viewer.index = [...this.parentNode.children].indexOf(this);
 		this.viewer.Set();
 		if (this.viewer.rotation) {
 			clearTimeout(this.viewer.rotation);
@@ -146,17 +146,17 @@ class Imageviewer extends vBaseHTML {
 		}
 	}
 
-	Controls() {
+	private Controls() {
 		// Create buttons
 		const container = this.mainImage.parentElement;
 		const btn: HTMLButtonElement = document.createElement('button');
 		btn.type = 'button';
 
-		const btnPrev = btn.cloneNode() as ViewerButton;
+		const btnPrev = btn.cloneNode() as IViewerButton;
 		btnPrev.innerText = '<';
 		btnPrev.addEventListener('click', this.Prev);
 		btnPrev.viewer = this;
-		const btnNext = btn.cloneNode() as ViewerButton;
+		const btnNext = btn.cloneNode() as IViewerButton;
 		btnNext.innerText = '>';
 		btnNext.viewer = this;
 		btnNext.addEventListener('click', this.Next);
@@ -165,13 +165,15 @@ class Imageviewer extends vBaseHTML {
 		container.appendChild(btnNext);
 	}
 
-	// Add main image to the grid of additional images. It has no use for the main image to be rendered by the server, when the page isn't interactive
-	MainToGrid() {
+	// Add main image to the grid of additional images.
+	// It has no use for the main image to be rendered by the server,
+	// when the page isn't interactive
+	private MainToGrid() {
 		const newImage = this.mainImage.cloneNode() as HTMLImageElement;
 		newImage.src = this.mainImage.dataset.src || this.mainImage.src;
 		newImage.width = 800;
 		this.grid.insertBefore(newImage, this.grid.querySelector('img'));
-		this.images = this.grid.querySelectorAll('img') as NodeListOf<ViewerImage>;
+		this.images = this.grid.querySelectorAll('img') as NodeListOf<IViewerImage>;
 		this.images[0].classList.add('selected');
 	}
 }

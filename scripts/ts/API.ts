@@ -1,65 +1,66 @@
-class API extends vBase {
+class API extends VBase {
 
-	server: string;
-	queryString: boolean;
+	private server: string;
+	private queryString: boolean;
 
-	constructor(API: string = '/api.php') {
+	constructor(api: string = '/api.php') {
 		super();
-		this.server = API;
+		this.server = api;
 		if (this.server !== '/api.php') {
 			this.queryString = true;
 		}
 	}
 
-	post(data: object, callback: Function) {
-		const API = new XMLHttpRequest();
-		API.open('POST', this.server);
-		API.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		API.withCredentials = true;
-		API.onload = function () {
-			if (API.status === 200) {
-				let json = API.responseText.replace(/(\r\n|\n|\r)/gm, '');
+	public post(data: object, callback: (data: object) => void) {
+		const api = new XMLHttpRequest();
+		api.open('POST', this.server);
+		api.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		api.withCredentials = true;
+		api.onload = () => {
+			if (api.status === 200) {
+				const jsonString = api.responseText.replace(/(\r\n|\n|\r)/gm, '');
+				let json;
 				try {
-					json = JSON.parse(json);
+					json = JSON.parse(jsonString);
 				} catch (err) {
 					return callback({
+						data: jsonString,
 						err: 'No JSON',
-						data: json
 					});
 				}
 				return callback(json);
 			} else {
-				console.warn('API error: ' + API.status);
+				console.warn('api error: ' + api.status);
 			}
 		};
 		if (this.queryString) {
-			const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&');
-			API.send(queryString);
+			const queryString = Object.keys(data).map((key) => key + '=' + data[key]).join('&');
+			api.send(queryString);
 		} else {
-			API.send(JSON.stringify(data));
+			api.send(JSON.stringify(data));
 		}
 	}
 
-	get(data: object, callback: Function) {
-		const API = new XMLHttpRequest();
-		API.open('GET', this.server); // TODO: Stringify object data into URL
-		API.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		API.onload = function () {
-			if (API.status === 200) {
+	public get(data: object, callback: (data: object) => void) {
+		const api = new XMLHttpRequest();
+		api.open('GET', this.server); // TODO: Stringify object data into URL
+		api.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		api.onload = () => {
+			if (api.status === 200) {
 				let json;
 				try {
-					json = JSON.parse(API.responseText.replace('?(', '').replace(');', ''));
+					json = JSON.parse(api.responseText.replace('?(', '').replace(');', ''));
 				} catch (err) {
 					return callback({
+						data: api.responseText,
 						err: 'No JSON',
-						data: API.responseText
 					});
 				}
 				return callback(json);
 			} else {
-				console.warn('API error: ' + API.status);
+				console.warn('api error: ' + api.status);
 			}
 		};
-		API.send(JSON.stringify(data));
+		api.send(JSON.stringify(data));
 	}
 }

@@ -1,17 +1,17 @@
-interface RadioWrap extends HTMLElement {
+interface IRadioWrap extends HTMLElement {
 	radiodiv: RadioDiv;
 }
 
-interface RadioInput extends HTMLInputElement {
+interface IRadioInput extends HTMLInputElement {
 	radiodiv: RadioDiv;
 	// product: Product; // TODO: Extend?
 }
 
 class RadioDiv {
 
-	group: RadioWrap[];
-	div: RadioWrap;
-	input: RadioInput;
+	public group: IRadioWrap[];
+	public div: IRadioWrap;
+	public input: IRadioInput;
 
 	constructor(input, group) {
 		// Set variables
@@ -23,7 +23,7 @@ class RadioDiv {
 		this.input.radiodiv = this;
 		this.div.radiodiv = this;
 
-		if (this.input.type == 'radio') {
+		if (this.input.type === 'radio') {
 			this.input.classList.add('visuallyhidden');
 		}
 		this.div.classList.add('js');
@@ -37,12 +37,12 @@ class RadioDiv {
 		this.input.addEventListener('change', this.Handle);
 	}
 
-	Handle(e) {
+	public Handle(e) {
 		const radiodiv = e.target.radiodiv;
 		radiodiv.Set();
 	}
 
-	HandleClick(e) {
+	public HandleClick(e) {
 		const radiodiv = e.target.radiodiv;
 		if (radiodiv) {
 			radiodiv.input.checked = true;
@@ -50,7 +50,7 @@ class RadioDiv {
 		}
 	}
 
-	Set() {
+	public Set() {
 		if (this.group.length) {
 			this.group.forEach((item) => {
 				if (item.radiodiv) {
@@ -67,7 +67,7 @@ class RadioDiv {
 		// }
 	}
 
-	TestGroup() {
+	public TestGroup() {
 		if (this.group.length) {
 			this.group.forEach((item) => {
 				console.log(item);

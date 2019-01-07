@@ -1,6 +1,6 @@
-class Lazy extends vBase {
-	
-	images: NodeListOf<HTMLImageElement>;
+class Lazy extends VBase {
+
+	private images: NodeListOf<HTMLImageElement>;
 
 	constructor() {
 		super();
@@ -8,11 +8,11 @@ class Lazy extends vBase {
 		this.Lazyfi();
 	}
 
-	Refresh() {
+	private Refresh() {
 		this.images = document.querySelectorAll('img.lazy');
 	}
 
-	Lazyfi() {
+	private Lazyfi() {
 		this.Refresh();
 		setTimeout(() => {
 			if (this.images.length > 0) {
@@ -28,8 +28,8 @@ class Lazy extends vBase {
 		}, 500);
 	}
 
-	Load(image) {
-		if (image.classList.contains('lazy') && image.src != image.dataset.src && !image.classList.contains('loading')) {
+	private Load(image) {
+		if (image.classList.contains('lazy') && image.src !== image.dataset.src && !image.classList.contains('loading')) {
 			// Preload the image
 			const img: HTMLImageElement = new Image();
 			image.classList.add('loading');
@@ -38,12 +38,12 @@ class Lazy extends vBase {
 				image.classList.remove('lazy');
 			};
 			img.src = image.dataset.src;
-		} else if (image.src == image.dataset.src) {
+		} else if (image.src === image.dataset.src) {
 			image.classList.remove('lazy');
 		}
 	}
 
-	InViewport(image) { // This doesn't work in scrollwindows
+	private InViewport(image) { // This doesn't work in scrollwindows
 		let top = image.offsetTop;
 		let left = image.offsetLeft;
 		const width = image.offsetWidth;
@@ -55,7 +55,7 @@ class Lazy extends vBase {
 			left += image.offsetLeft;
 		}
 
-		let scope = window;
+		const scope = window;
 		return (
 			top < (scope.pageYOffset + scope.innerHeight) &&
 			left < (scope.pageXOffset + scope.innerWidth) &&

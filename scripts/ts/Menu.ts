@@ -1,6 +1,6 @@
 class Menu {
 
-	mainMenu: HTMLElement;
+	private mainMenu: HTMLElement;
 
 	constructor() {
 		document.querySelector('.navList').addEventListener('click', this.UnfocusOnClick);
@@ -9,7 +9,7 @@ class Menu {
 		this.mainMenu.addEventListener('click', this.MainMenu);
 	}
 
-	UnfocusOnClick(this: HTMLElement, e: Event) {
+	private UnfocusOnClick(this: HTMLElement, e: Event) {
 		if (e.target === this) {
 			this.classList.add('unhover');
 			setTimeout(() => {
@@ -18,7 +18,7 @@ class Menu {
 		}
 	}
 
-	MainMenu(this: HTMLElement, e: Event) {
+	private MainMenu(this: HTMLElement, e: Event) {
 		if (e.target === this) {
 			this.classList.toggle('open');
 		}
