@@ -79,11 +79,11 @@ export class Imageviewer extends vBaseHTML {
 				img.classList.add('new');
 				this.mainImage.parentElement.appendChild(img);
 				this.mainImage.classList.add('fade');
-				this.rotation = setTimeout(() => {
-					this.mainImage.src = img.src;
-					this.mainImage.classList.remove('fade');
-					img.parentElement.removeChild(img);
-				}, 600);
+				// this.rotation = setTimeout(() => {
+				// 	this.mainImage.src = img.src;
+				// 	this.mainImage.classList.remove('fade');
+				// 	img.parentElement.removeChild(img);
+				// }, 600);
 			} else {
 				img = this.mainImage;
 				this.mainImage.src = newImg.src;

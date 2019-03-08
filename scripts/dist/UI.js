@@ -1,3 +1,4 @@
+// TODO: Theres probably an updated version in EG
 export class UITools {
     // Base
     Create(classes, id, elementName = 'div') {
@@ -71,7 +72,34 @@ export class UITools {
         const element = this.CreateText(text, classes, id, 'label');
         return element;
     }
-    CreateInputText(label, type, name, value = '', placeholder = ' ', classes, required = false) {
+    CreateInputText(label, name, type = 'text', required = false, value = '', placeholder = ' ', classes) {
+        const input = this.CreateInput(name, type, required, value, placeholder, classes);
+        label.appendChild(input);
+        return label;
+    }
+    CreateForm(fields, action = window.location.href, method = 'POST', classes, id) {
+        const submit = this.CreateInput(null, 'submit');
+        submit.type = 'submit';
+        fields.push(submit);
+        const form = this.Wrap(fields, classes, id, 'form');
+        form.action = action;
+        form.method = method;
+        return form;
+    }
+    CreateInput(name, type = 'text', required = false, value = '', placeholder = ' ', classes) {
+        const input = this.Create(classes, name, 'input');
+        input.type = type;
+        if (type === 'submit') {
+            return input;
+        }
+        input.name = name;
+        input.value = value;
+        if (type === 'hidden') {
+            return input;
+        }
+        input.required = required;
+        input.placeholder = placeholder;
+        return input;
     }
     // CreateInputSet()
     // CreateInputRadio()
@@ -94,5 +122,14 @@ export class UITools {
     addHandler(element, handler, type = 'click') {
         element.addEventListener(type, handler);
         return element;
+    }
+    // Rendering
+    // Render()
+    Wrap(elements, classes = [], id = '', wrapperType = 'div') {
+        const wrapper = this.Create(classes, id, wrapperType);
+        elements.forEach((element) => {
+            wrapper.appendChild(element);
+        });
+        return wrapper;
     }
 }

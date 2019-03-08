@@ -1,3 +1,4 @@
+// TODO: Theres probably an updated version in EG
 export class UITools {
 	// Base
 	Create(classes?: Array<string>, id?: string, elementName: string = 'div') {
@@ -78,8 +79,38 @@ export class UITools {
 		return element;
 	}
 
-	CreateInputText(label: HTMLLabelElement, type: string, name: string, value: string = '', placeholder: string = ' ', classes?: Array<string>, required: boolean = false) {
+	CreateInputText(label: HTMLLabelElement, name: string, type: string = 'text', required: boolean = false, value: string = '', placeholder: string = ' ', classes?: Array<string>) {
+		const input = this.CreateInput(name, type, required, value, placeholder, classes);
+		label.appendChild(input);
+		return label;
+	}
 
+	CreateForm(fields: Array<HTMLLabelElement>, action: string = window.location.href, method: string = 'POST', classes?: Array<string>, id?: string) {
+		const submit = this.CreateInput(null, 'submit');
+		submit.type = 'submit';
+		fields.push(submit);
+
+		const form = this.Wrap(fields, classes, id, 'form');
+		form.action = action;
+		form.method = method;
+
+		return form
+	}
+
+	CreateInput(name: string, type: string = 'text', required: boolean = false, value: string = '', placeholder: string = ' ', classes?: Array<string>) {
+		const input = this.Create(classes, name, 'input');
+		input.type = type;
+		if (type === 'submit') {
+			return input;
+		}
+		input.name = name;
+		input.value = value;
+		if (type === 'hidden') {
+			return input;
+		}
+		input.required = required;
+		input.placeholder = placeholder;
+		return input;
 	}
 
 
@@ -117,6 +148,13 @@ export class UITools {
 	// Rendering
 
 	// Render()
-	// Wrap()
+	Wrap(elements: Array<HTMLElement>, classes: Array<string> = [], id: string = '', wrapperType: string = 'div') {
+		const wrapper = this.Create(classes, id, wrapperType);
+		elements.forEach((element) => {
+			wrapper.appendChild(element);
+		});
+		return wrapper;
+	}
+
 	// WrapRender()
 }
