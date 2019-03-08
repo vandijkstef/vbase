@@ -74,7 +74,7 @@ export class UITools {
 	}
 
 	// Form
-	CreateLabel(text: string, classes: Array<string>, id: string) {
+	CreateLabel(text: string, classes?: Array<string>, id?: string) {
 		const element: HTMLLabelElement = this.CreateText(text, classes, id, 'label');
 		return element;
 	}
