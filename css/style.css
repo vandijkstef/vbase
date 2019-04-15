@@ -63,8 +63,11 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3, h4, h5, h6, nav a {
   font-family: sans-serif;
-  font-weight: 400;
-}
+  font-weight: 400; }
+  h1 label, h2 label, h3 label, h4 label, h5 label, h6 label, nav a label {
+    color: #0060c4;
+    font-family: sans-serif;
+    font-weight: 400; }
 
 h1 label, h2 label, h3 label, h4 label, h5 label, h6 label, nav a label {
   color: #0060c4;
@@ -73,8 +76,7 @@ h1 label, h2 label, h3 label, h4 label, h5 label, h6 label, nav a label {
 }
 
 p, div, li, a {
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
 
 p, main ul, footer ul, table, address, label {
   color: #222222;

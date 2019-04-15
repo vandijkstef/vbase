@@ -1,4 +1,4 @@
-class Menu {
+export class Menu {
     constructor() {
         document.querySelector('.navList').addEventListener('click', this.UnfocusOnClick);
         this.mainMenu = document.querySelector('nav#main');

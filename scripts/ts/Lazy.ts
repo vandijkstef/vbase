@@ -1,4 +1,6 @@
-class Lazy extends vBase {
+import { vBase } from './vbase/vBase';
+
+export class Lazy extends vBase {
 	
 	images: NodeListOf<HTMLImageElement>;
 

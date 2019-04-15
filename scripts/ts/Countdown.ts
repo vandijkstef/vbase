@@ -1,4 +1,6 @@
-class Countdown extends vBaseHTML {
+import { vBaseHTML } from './vbase/vBaseHTML';
+
+export class Countdown extends vBaseHTML {
 	
 	time: number;
 	date: Date;

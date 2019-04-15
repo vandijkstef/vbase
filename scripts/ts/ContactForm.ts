@@ -1,4 +1,6 @@
-class ContactForm extends Form {
+import { Form } from './Form';
+
+export class ContactForm extends Form {
 	constructor(form) {
 		super(form);
 	}
