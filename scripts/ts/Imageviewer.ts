@@ -1,5 +1,5 @@
-import { vBaseHTML } from './vbase/vBaseHTML';
-import { Lazy } from './Lazy';
+import { vBaseHTML } from './vBase/vBaseHtml.js';
+import { Lazy } from './Lazy.js';
 
 interface ImageViewerSettings {
 	rotate: boolean;

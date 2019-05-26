@@ -1,4 +1,4 @@
-import { vBaseHTML } from './vbase/vBaseHTML';
+import { vBaseHTML } from './vBase/vBaseHtml.js';
 
 export class Countdown extends vBaseHTML {
 	
