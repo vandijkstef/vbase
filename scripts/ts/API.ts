@@ -1,4 +1,4 @@
-import { vBase } from './vbase/vBase';
+import { vBase } from './vbase/vBase.js';
 
 export class API extends vBase {
 

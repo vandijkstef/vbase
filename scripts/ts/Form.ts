@@ -1,4 +1,4 @@
-import { vBase } from './vbase/vBase';
+import { vBase } from './vbase/vBase.js';
 import { API } from './API';
 
 // General form class, to be extended

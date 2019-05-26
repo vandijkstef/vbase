@@ -4,13 +4,13 @@
   "description": "Web base used througout my projects",
   "main": "''",
   "scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1",
-	"build": "npm run build-css && tsc",
-	"build-dev": "npm run build-dev-css && tsc",
-	"build-all": "npm run build && npm run build-dev",
-	"build-css": "node-sass --include-path scss --output-style compressed ./css/sass/stylesheet.scss ./css/style.min.css",
-	"build-dev-css": "node-sass --include-path scss ./css/sass/stylesheet.scss ./css/style.css",
-	"build-js": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build-css && tsc",
+    "build-dev": "npm run build-dev-css && tsc",
+    "build-all": "npm run build && npm run build-dev",
+    "build-css": "node-sass --include-path scss --output-style compressed ./css/sass/stylesheet.scss ./css/style.min.css",
+    "build-dev-css": "node-sass --include-path scss ./css/sass/stylesheet.scss ./css/style.css",
+    "build-js": "tsc"
   },
   "repository": {
     "type": "git",
