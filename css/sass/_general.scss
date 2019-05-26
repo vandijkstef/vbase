@@ -19,12 +19,6 @@ body {
 	& main {
 		min-height: 50vh; // Force height for direct-body main containers (should be one)
 	}
-	&.dark {
-		background-color: $backgroundcolor-dark;
-		p, main ul, footer ul, table, address, label, pre {
-			color: $textcolor-light;
-		}
-	}
 }
 
 .hidden {
