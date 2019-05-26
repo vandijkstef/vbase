@@ -1,5 +1,5 @@
-import { vBaseHTML } from './vbase/vBaseHTML';
-import { Lazy } from './Lazy';
+import { vBaseHTML } from './vBase/vBaseHtml.js';
+import { Lazy } from './Lazy.js';
 export class Imageviewer extends vBaseHTML {
     constructor(mainWrap, gridWrap, options) {
         super(document.querySelector('#images .main img')); // TODO: This has to be a wrapper?

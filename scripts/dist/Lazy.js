@@ -1,4 +1,4 @@
-import { vBase } from './vbase/vBase';
+import { vBase } from './vBase/vBase.js';
 export class Lazy extends vBase {
     constructor() {
         super();
