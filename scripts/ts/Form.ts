@@ -1,5 +1,5 @@
 import { vBase } from './vBase/vBase.js';
-import { API } from './API';
+import { API } from './API.js';
 
 // General form class, to be extended
 interface FormInput {
@@ -9,7 +9,7 @@ interface FormInput {
 }
 
 export class Form extends vBase {
-
+	// TODO: Make even smarter, link up with UI in case they are not ServerSide rendered
 	submitBtn: HTMLInputElement;
 	FormData: object;
 	fields: FormInput[];
